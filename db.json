@@ -1,0 +1,54 @@
+{
+  "tasks": [
+    {
+      "id": 1,
+      "title": "Set up project",
+      "description": "Initialize Angular project and install dependencies",
+      "status": "todo",
+      "priority": "high",
+      "dueDate": "2025-11-05T23:59:59Z",
+      "createdAt": "2025-11-01T08:00:00Z",
+      "updatedAt": "2025-11-01T08:00:00Z"
+    },
+    {
+      "id": 2,
+      "title": "Create Kanban board",
+      "description": "Build the board component with three columns",
+      "status": "in-progress",
+      "priority": "medium",
+      "dueDate": "2025-11-07T23:59:59Z",
+      "createdAt": "2025-11-01T08:30:00Z",
+      "updatedAt": "2025-11-01T08:30:00Z"
+    },
+    {
+      "id": 3,
+      "title": "Add task modal",
+      "description": "Implement add/edit/delete modal with ng-zorro",
+      "status": "todo",
+      "priority": "medium",
+      "dueDate": "2025-11-08T23:59:59Z",
+      "createdAt": "2025-11-01T09:00:00Z",
+      "updatedAt": "2025-11-01T09:00:00Z"
+    },
+    {
+      "id": 4,
+      "title": "Implement drag & drop",
+      "description": "Use Angular CDK DragDropModule to move tasks between columns",
+      "status": "todo",
+      "priority": "high",
+      "dueDate": "2025-11-09T23:59:59Z",
+      "createdAt": "2025-11-01T09:30:00Z",
+      "updatedAt": "2025-11-01T09:30:00Z"
+    },
+    {
+      "id": 5,
+      "title": "Dashboard charts",
+      "description": "Add pie chart for status and bar chart for priority",
+      "status": "done",
+      "priority": "low",
+      "dueDate": "2025-11-04T23:59:59Z",
+      "createdAt": "2025-11-01T07:30:00Z",
+      "updatedAt": "2025-11-01T07:30:00Z"
+    }
+  ]
+}
