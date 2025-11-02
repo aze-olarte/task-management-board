@@ -1,4 +1,4 @@
-import { Component, effect, Inject, Input, input, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, effect, Inject, Input, input, signal } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -31,6 +31,7 @@ import { NotificationService } from '../../core/services/notification.service';
   ],
   templateUrl: './board-form.component.html',
   styleUrl: './board-form.component.scss',
+  changeDetection:ChangeDetectionStrategy.OnPush
 })
 export class BoardFormComponent {
   form = new FormGroup({
