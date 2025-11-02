@@ -1,0 +1,12 @@
+.text-muted { color: var(--gray-500); }
+.text-sm { font-size: var(--text-sm); }
+.text-lg { font-size: var(--text-lg); }
+.text-bold { font-weight: var(--font-bold); }
+
+.rounded-lg { border-radius: var(--radius-lg); }
+.shadow-md { box-shadow: var(--shadow-md); }
+
+.hover-elevate {
+  transition: box-shadow var(--transition-base);
+  &:hover { box-shadow: var(--shadow-md); transform: translateY(-2px); }
+}
