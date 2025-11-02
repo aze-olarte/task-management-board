@@ -1,0 +1,41 @@
+// AI Generated Styling for simple spacing + layout
+
+.task-card {
+  width: 100%;
+  margin-bottom: 12px;
+}
+
+.task-header {
+  display: flex;
+  margin: 0 0 10px 0;
+}
+
+.task-body {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.title {
+  color: rgba(0, 0, 0, 0.75);
+  margin-bottom: 8px;
+}
+
+.meta {
+  display: flex;
+  flex-flow: column;
+  gap: 5px;
+  font-size: 13px;
+}
+
+.due {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: rgba(0, 0, 0, 0.75);
+}
+
+[nz-icon] {
+  font-size: 14px;
+  color: rgba(0, 0, 0, 0.6);
+}

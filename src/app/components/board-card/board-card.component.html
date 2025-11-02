@@ -1,0 +1,27 @@
+<nz-card class="task-card">
+  <div class="task-header">
+    <nz-tag [nzColor]="priorityColor()">
+      {{ task()?.priority | titlecase }}
+    </nz-tag>
+
+    <div>
+
+    </div>
+  </div>
+
+  <div class="task-body">
+    <b>{{ task()?.title }}</b>
+    <p class="desc">{{ task()?.description | truncate }}</p>
+
+    <div class="meta">
+      <div class="due">
+        @if(task()?.status === 'done') {
+        <span>Completed</span>
+        } @else {
+        <i nz-icon nzType="calendar" nzTheme="outline"></i>
+        <span>{{ task()?.dueDate | date : "MMMM d, y" }}</span>
+        }
+      </div>
+    </div>
+  </div>
+</nz-card>

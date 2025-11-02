@@ -10,3 +10,7 @@ export interface Task {
   createdAt: Date;    
   updatedAt: Date;   
 }
+
+export type TaskGroupedByStatus = {
+  [K in TaskStatus]: Task[];
+};
