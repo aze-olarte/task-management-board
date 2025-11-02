@@ -12,10 +12,15 @@
     <div class="meta">
       <div class="due">
         @if (task()?.status === 'done') {
-        <span class="status-done">Completed</span>
+        <p class="status-done">Completed</p>
         } @else {
-        <i nz-icon nzType="calendar" nzTheme="outline"></i>
-        <time>{{ task()?.dueDate | date : "MMMM d, y" }}</time>
+          <i nz-icon nzType="calendar" nzTheme="outline"></i>
+          @if(task()?.dueDate) {
+            <time>{{ task()?.dueDate | date : "MMMM d, y" }}</time>
+          }
+          @else {
+            <p>N/A</p>
+          }
         }
       </div>
     </div>
