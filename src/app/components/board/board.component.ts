@@ -90,20 +90,16 @@ export class BoardComponent implements OnInit {
   }
 
   drop(event: CdkDragDrop<Task[]>) {
-    if (event.previousContainer === event.container) {
-      moveItemInArray(
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
-    } else {
+    // As a limitation, only allow drag and drop to a different list. Prevent manual sorting
+    if (event.previousContainer !== event.container) {
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,
         event.previousIndex,
         event.currentIndex
       );
-    }
+    } 
+    return;
   }
 
   addTask() {
