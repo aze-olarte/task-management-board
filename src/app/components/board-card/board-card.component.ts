@@ -15,6 +15,8 @@ import { TruncatePipe } from '../../shared/pipes/truncate.pipe';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzModalModule, NzModalService } from 'ng-zorro-antd/modal';
 import { BoardFormComponent, BoardFormProps } from '../board-form/board-form.component';
+import { TaskService } from '../../core/services/task.service';
+import { NotificationService } from '../../core/services/notification.service';
 
 @Component({
   selector: 'app-board-card',
@@ -52,7 +54,9 @@ export class BoardCardComponent {
 
   constructor(
     private modalService: NzModalService,
-    private viewContainerRef: ViewContainerRef
+    private viewContainerRef: ViewContainerRef,
+    private taskService: TaskService,
+    private notificationService: NotificationService
   ) {}
 
 
@@ -72,5 +76,24 @@ export class BoardCardComponent {
         this.taskChanged.emit();
       }
     })
+  }
+
+  deleteTask() {
+    this.modalService.confirm({
+      nzTitle: 'Are you sure delete this task?',
+      nzOkText: 'Yes',
+      nzOkType: 'primary',
+      nzOkDanger: true,
+      nzOnOk: () => {
+        this.taskService.deleteTask(this.task()!.id).subscribe({
+          next: () => {
+            this.notificationService.showSuccess('Task Deleted');
+            this.taskChanged.emit();
+          },
+          error: (error) => this.notificationService.showError(error)
+        })
+      },
+      nzCancelText: 'No',
+    });
   }
 }

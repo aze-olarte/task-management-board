@@ -36,4 +36,8 @@ export class TaskService {
   updateTask(id: number, payload: TaskPayload) {
     return this.http.put<Task>(`${this.baseUrl}/${id}`, payload);
   }
+
+  deleteTask(id: number) {
+    return this.http.delete<void>(`${this.baseUrl}/${id}`)
+  }
 }
