@@ -49,6 +49,76 @@
       "dueDate": "2025-11-04T23:59:59Z",
       "createdAt": "2025-11-01T07:30:00Z",
       "updatedAt": "2025-11-01T07:30:00Z"
+    },
+    {
+      "id": 6,
+      "title": "Task filtering",
+      "description": "Implement task filtering by status and priority",
+      "status": "in-progress",
+      "priority": "medium",
+      "dueDate": "2025-11-10T23:59:59Z",
+      "createdAt": "2025-11-02T08:00:00Z",
+      "updatedAt": "2025-11-02T08:00:00Z"
+    },
+    {
+      "id": 7,
+      "title": "Search functionality",
+      "description": "Add a search bar to filter tasks by title or description",
+      "status": "todo",
+      "priority": "low",
+      "dueDate": "2025-11-11T23:59:59Z",
+      "createdAt": "2025-11-02T09:00:00Z",
+      "updatedAt": "2025-11-02T09:00:00Z"
+    },
+    {
+      "id": 8,
+      "title": "User authentication",
+      "description": "Add login and registration using JWT",
+      "status": "todo",
+      "priority": "high",
+      "dueDate": "2025-11-12T23:59:59Z",
+      "createdAt": "2025-11-02T10:00:00Z",
+      "updatedAt": "2025-11-02T10:00:00Z"
+    },
+    {
+      "id": 9,
+      "title": "API integration",
+      "description": "Connect frontend with mock REST API",
+      "status": "in-progress",
+      "priority": "high",
+      "dueDate": "2025-11-13T23:59:59Z",
+      "createdAt": "2025-11-02T11:00:00Z",
+      "updatedAt": "2025-11-02T11:00:00Z"
+    },
+    {
+      "id": 10,
+      "title": "Notifications",
+      "description": "Add toast notifications for task actions",
+      "status": "todo",
+      "priority": "medium",
+      "dueDate": "2025-11-14T23:59:59Z",
+      "createdAt": "2025-11-02T12:00:00Z",
+      "updatedAt": "2025-11-02T12:00:00Z"
+    },
+    {
+      "id": 11,
+      "title": "Responsive layout",
+      "description": "Ensure board and modals are mobile-friendly",
+      "status": "in-progress",
+      "priority": "high",
+      "dueDate": "2025-11-15T23:59:59Z",
+      "createdAt": "2025-11-02T13:00:00Z",
+      "updatedAt": "2025-11-02T13:00:00Z"
+    },
+    {
+      "id": 12,
+      "title": "Unit tests",
+      "description": "Write tests for components and services",
+      "status": "todo",
+      "priority": "medium",
+      "dueDate": "2025-11-16T23:59:59Z",
+      "createdAt": "2025-11-02T14:00:00Z",
+      "updatedAt": "2025-11-02T14:00:00Z"
     }
   ]
 }
