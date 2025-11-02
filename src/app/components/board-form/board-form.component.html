@@ -35,18 +35,21 @@
           <nz-option nzValue="done" nzLabel="Done"></nz-option>
         </nz-select>
         <ng-template #statusError let-control>
-        @if (control.errors?.['required']) { Status is required }
+          @if (control.errors?.['required']) { Status is required }
         </ng-template>
       </nz-form-control>
     </nz-form-item>
     <nz-form-item class="flex-item">
-      <nz-form-label>Priority</nz-form-label>
-      <nz-form-control>
+      <nz-form-label nzRequired>Priority</nz-form-label>
+      <nz-form-control [nzErrorTip]="priorityError">
         <nz-select id="priority" formControlName="priority">
           <nz-option nzValue="low" nzLabel="Low"></nz-option>
           <nz-option nzValue="medium" nzLabel="Medium"></nz-option>
           <nz-option nzValue="high" nzLabel="High"></nz-option>
         </nz-select>
+        <ng-template #priorityError let-control>
+          @if (control.errors?.['required']) { Priority is required }
+        </ng-template>
       </nz-form-control>
     </nz-form-item>
   </div>

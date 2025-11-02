@@ -12,6 +12,10 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzModalRef } from 'ng-zorro-antd/modal';
 import { NzSelectModule } from 'ng-zorro-antd/select';
+import { TaskService } from '../../core/services/task.service';
+import { Task } from '../../core/models/task.model';
+import { TaskPriority, TaskStatus } from '../../core/models/task.type';
+import { NotificationService } from '../../core/services/notification.service';
 
 @Component({
   selector: 'app-board-form',
@@ -23,7 +27,7 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
     FormsModule,
     NzSelectModule,
     NzDatePickerModule,
-    NzButtonModule
+    NzButtonModule,
   ],
   templateUrl: './board-form.component.html',
   styleUrl: './board-form.component.scss',
@@ -31,17 +35,25 @@ import { NzSelectModule } from 'ng-zorro-antd/select';
 export class BoardFormComponent {
   isNew = input<boolean>(true);
   form = new FormGroup({
-    title: new FormControl('', Validators.required),
-    description: new FormControl(''),
-    status: new FormControl('todo', Validators.required),
-    priority: new FormControl(undefined),
+    title: new FormControl('', {
+      nonNullable: true,
+      validators: [Validators.required],
+    }),
+    description: new FormControl('', { nonNullable: true }),
+    status: new FormControl<TaskStatus>('todo', {
+      nonNullable: true,
+      validators: [Validators.required],
+    }),
+    priority: new FormControl<TaskPriority>('low', {
+      nonNullable: true,
+    }),
     dueDate: new FormControl(new Date()),
   });
 
-  constructor(private modalRef: NzModalRef){}
+  constructor(private modalRef: NzModalRef, private taskService: TaskService, private notificationService: NotificationService) {}
 
-  close() {
-    this.modalRef.close();
+  close(data?: Task) {
+    this.modalRef.close(data);
   }
 
   onSubmit() {
@@ -53,7 +65,18 @@ export class BoardFormComponent {
       return;
     }
 
-    
+    const payload = {
+      ...this.form.getRawValue(),
+      id: 0,
+    };
+
+    this.taskService.addTask(payload).subscribe({
+      next: (data) => {
+        this.notificationService.showSuccess('Task Created')
+        this.close(data);
+      },
+      error: (error) => this.notificationService.showError(error)
+    });
   }
 }
 

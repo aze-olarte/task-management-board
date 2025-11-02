@@ -119,7 +119,7 @@ export class BoardComponent implements OnInit {
 
     modal.afterClose.subscribe(result => {
       if(result) {
-        console.log('modal closed')
+        this.getData();
       }
     })
   }

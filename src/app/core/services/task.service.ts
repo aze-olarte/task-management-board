@@ -2,7 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { environment } from '../../../../environment';
-import { Task, TaskGroupedByStatus } from '../models/task.model';
+import { Task, TaskGroupedByStatus, TaskPayload } from '../models/task.model';
 
 @Injectable({
   providedIn: 'root',
@@ -27,5 +27,9 @@ export class TaskService {
         return grouped;
       })
     );
+  }
+
+  addTask(payload: TaskPayload) {
+    return this.http.post<Task>(this.baseUrl, payload);
   }
 }
