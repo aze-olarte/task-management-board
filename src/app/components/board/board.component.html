@@ -20,7 +20,7 @@
       @if (loading()) {
       <nz-spin nzTip="Loading..." class="spinner-column"></nz-spin>
       } @else { @for (item of data()[group.key]; track item) {
-      <app-board-card cdkDrag [task]="item"></app-board-card>
+      <app-board-card cdkDrag [task]="item" (taskChanged)="getData()"></app-board-card>
       } }
     </div>
   </div>

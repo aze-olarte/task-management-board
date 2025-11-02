@@ -10,13 +10,13 @@ import en from '@angular/common/locales/en';
 import { FormsModule } from '@angular/forms';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
 import { IconDefinition } from '@ant-design/icons-angular';
-import { CalendarOutline } from '@ant-design/icons-angular/icons';
+import { CalendarOutline, EditOutline } from '@ant-design/icons-angular/icons';
 import { en_US, provideNzI18n } from 'ng-zorro-antd/i18n';
 import { provideNzIcons } from 'ng-zorro-antd/icon';
 import { routes } from './app.routes';
 import { interceptor } from './core/services/interceptor.service';
 
-const icons: IconDefinition[] = [CalendarOutline];
+const icons: IconDefinition[] = [CalendarOutline, EditOutline];
 
 registerLocaleData(en);
 

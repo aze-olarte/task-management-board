@@ -32,4 +32,8 @@ export class TaskService {
   addTask(payload: TaskPayload) {
     return this.http.post<Task>(this.baseUrl, payload);
   }
+
+  updateTask(id: number, payload: TaskPayload) {
+    return this.http.put<Task>(`${this.baseUrl}/${id}`, payload);
+  }
 }

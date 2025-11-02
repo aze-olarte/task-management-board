@@ -1,4 +1,4 @@
-import { Component, input } from '@angular/core';
+import { Component, effect, Inject, Input, input, signal } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -10,7 +10,7 @@ import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
-import { NzModalRef } from 'ng-zorro-antd/modal';
+import { NZ_MODAL_DATA, NzModalRef } from 'ng-zorro-antd/modal';
 import { NzSelectModule } from 'ng-zorro-antd/select';
 import { TaskService } from '../../core/services/task.service';
 import { Task } from '../../core/models/task.model';
@@ -33,7 +33,6 @@ import { NotificationService } from '../../core/services/notification.service';
   styleUrl: './board-form.component.scss',
 })
 export class BoardFormComponent {
-  isNew = input<boolean>(true);
   form = new FormGroup({
     title: new FormControl('', {
       nonNullable: true,
@@ -50,10 +49,26 @@ export class BoardFormComponent {
     dueDate: new FormControl(new Date()),
   });
 
-  constructor(private modalRef: NzModalRef, private taskService: TaskService, private notificationService: NotificationService) {}
+  constructor(
+    private modalRef: NzModalRef,
+    private taskService: TaskService,
+    private notificationService: NotificationService,
+    @Inject(NZ_MODAL_DATA) public props: BoardFormProps
+  ) {
+    if (props.data) {
+      this.prefillForm(props.data);
+    }
+  }
 
   close(data?: Task) {
     this.modalRef.close(data);
+  }
+
+  prefillForm(data: Task) {
+    this.form.patchValue({
+      ...data,
+      dueDate: data.dueDate ? new Date(data.dueDate) : null,
+    });
   }
 
   onSubmit() {
@@ -67,19 +82,25 @@ export class BoardFormComponent {
 
     const payload = {
       ...this.form.getRawValue(),
-      id: 0,
+      id: this.props.data ? (this.props.data as Task).id : 0,
     };
+    const isNew = payload.id === 0;
 
-    this.taskService.addTask(payload).subscribe({
+    const observable$ = isNew
+      ? this.taskService.addTask(payload)
+      : this.taskService.updateTask(payload.id, payload);
+
+    observable$.subscribe({
       next: (data) => {
-        this.notificationService.showSuccess('Task Created')
+        const message = `Task ${isNew ? 'Created' : 'Updated'}`;
+        this.notificationService.showSuccess(message);
         this.close(data);
       },
-      error: (error) => this.notificationService.showError(error)
+      error: (error) => this.notificationService.showError(error),
     });
   }
 }
 
 export interface BoardFormProps {
-  isNew: boolean;
+  data?: Task;
 }

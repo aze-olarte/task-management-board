@@ -3,6 +3,12 @@
     <nz-tag [nzColor]="priorityColor()">
       {{ task()?.priority | titlecase }}
     </nz-tag>
+
+    <div class="action-buttons">
+      <button type="button" (click)="editTask()" class="edit-btn">
+        <i nz-icon nzType="edit" nzTheme="outline"></i>
+      </button>
+    </div>
   </header>
 
   <section class="task-body">

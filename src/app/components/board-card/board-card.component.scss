@@ -28,6 +28,34 @@
   align-items: flex-start;
 }
 
+.action-buttons {
+  display: flex;
+  gap: 2px;
+
+
+  button {
+    border: none;
+    background: transparent;
+    cursor: pointer;
+    padding: 4px;
+    transition: color 0.2s ease, transform 0.15s ease;
+
+    i {
+      font-size: var(--text-sm);
+      color: var(--gray-700);
+    }
+
+    &:hover i {
+      color: var(--primary-blue);
+      transform: scale(1.1);
+    }
+
+    &:active i {
+      transform: scale(0.95);
+    }
+  }
+}
+
 /* BODY */
 .task-body {
   display: flex;
@@ -66,7 +94,7 @@
   color: var(--gray-700);
 
   [nz-icon] {
-    font-size: 14px;
+    font-size: var(--text-sm);
     color: var(--gray-500);
   }
 

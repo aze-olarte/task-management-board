@@ -112,7 +112,6 @@ export class BoardComponent implements OnInit {
       nzContent: BoardFormComponent,
       nzViewContainerRef: this.viewContainerRef,
       nzData: {
-        isNew: true
       },
       nzFooter: null
     })
