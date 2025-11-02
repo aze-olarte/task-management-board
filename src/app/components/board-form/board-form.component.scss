@@ -1,0 +1,20 @@
+.form {
+  margin: 0 auto;
+
+  .form-row {
+    display: flex;
+    gap: 16px;
+
+    .flex-item {
+      flex: 1;
+    }
+  }
+
+  nz-form-item {
+    margin-bottom: 16px;
+  }
+
+  button[nz-button] {
+    font-weight: 500;
+  }
+}

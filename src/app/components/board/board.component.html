@@ -1,3 +1,9 @@
+<div class="board-header">
+  <button (click)="addTask()" nz-button nzType="primary"> 
+    Add Task
+  </button>
+</div>
+
 <div cdkDropListGroup>
   @for (group of groups; track group.key) {
   <div class="board-container">

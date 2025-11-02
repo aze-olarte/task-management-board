@@ -10,17 +10,22 @@ import {
   Component,
   OnInit,
   signal,
+  ViewContainerRef,
 } from '@angular/core';
+import { NzModalModule, NzModalService } from 'ng-zorro-antd/modal';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { finalize } from 'rxjs';
 import { Task, TaskGroupedByStatus } from '../../core/models/task.model';
 import { NotificationService } from '../../core/services/notification.service';
 import { TaskService } from '../../core/services/task.service';
 import { BoardCardComponent } from '../board-card/board-card.component';
+import { BoardFormComponent, BoardFormProps } from '../board-form/board-form.component';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [CdkDropList, CdkDrag, BoardCardComponent, NzSpinModule],
+  imports: [CdkDropList, CdkDrag, BoardCardComponent, NzSpinModule, NzModalModule, NzButtonModule],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -60,7 +65,9 @@ export class BoardComponent implements OnInit {
 
   constructor(
     private taskService: TaskService,
-    private notificationService: NotificationService
+    private notificationService: NotificationService,
+    private modalService: NzModalService,
+    private viewContainerRef: ViewContainerRef
   ) {}
 
   ngOnInit() {
@@ -97,5 +104,23 @@ export class BoardComponent implements OnInit {
         event.currentIndex
       );
     }
+  }
+
+  addTask() {
+    const modal = this.modalService.create<BoardFormComponent, BoardFormProps> ({
+      nzTitle: 'Create New Task',
+      nzContent: BoardFormComponent,
+      nzViewContainerRef: this.viewContainerRef,
+      nzData: {
+        isNew: true
+      },
+      nzFooter: null
+    })
+
+    modal.afterClose.subscribe(result => {
+      if(result) {
+        console.log('modal closed')
+      }
+    })
   }
 }
