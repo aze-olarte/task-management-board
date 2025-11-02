@@ -13,7 +13,7 @@
   margin-bottom: 24px;
 }
 
-/* Board wrapper */
+/* Board wrapper (columns container) */
 [cdkDropListGroup] {
   display: flex;
   gap: var(--space-4);
@@ -66,9 +66,8 @@
     flex-shrink: 0;
   }
 
-  /* Adjustments for smaller viewports */
   @media (max-width: 767px) {
-    height: calc(100vh - 120px); /* fits under header/footer if any */
+    height: calc(100vh - 120px);
     min-width: 85vw;
   }
 
@@ -118,10 +117,10 @@
   border-radius: var(--radius-lg);
 }
 
-.spinner-column {
+.board-loading {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-grow: 1;
-  color: var(--primary-blue);
+  min-height: 60vh;
+  width: 100%;
 }

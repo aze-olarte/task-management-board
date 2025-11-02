@@ -1,14 +1,15 @@
-<div class="board-header">
-  <button (click)="addTask()" nz-button nzType="primary"> 
-    Add Task
-  </button>
+@if (loading()) {
+<div class="board-loading">
+  <nz-spin nzSize="large"></nz-spin>
 </div>
-
+} @else {
+<div class="board-header">
+  <button (click)="addTask()" nz-button nzType="primary">Add Task</button>
+</div>
 <div cdkDropListGroup>
   @for (group of groups; track group.key) {
   <div class="board-container">
     <h2>{{ group.label }}</h2>
-
     <div
       [id]="group.id"
       cdkDropList
@@ -17,12 +18,15 @@
       class="board-list"
       (cdkDropListDropped)="drop($event)"
     >
-      @if (loading()) {
-      <nz-spin nzTip="Loading..." class="spinner-column"></nz-spin>
-      } @else { @for (item of data()[group.key]; track item) {
-      <app-board-card cdkDrag [task]="item" (taskChanged)="getData()"></app-board-card>
-      } }
+      @for (item of data()[group.key]; track item) {
+      <app-board-card
+        cdkDrag
+        [task]="item"
+        (taskChanged)="getData()"
+      ></app-board-card>
+      }
     </div>
   </div>
   }
 </div>
+}
