@@ -19,13 +19,24 @@ import { Task, TaskGroupedByStatus } from '../../core/models/task.model';
 import { NotificationService } from '../../core/services/notification.service';
 import { TaskService } from '../../core/services/task.service';
 import { BoardCardComponent } from '../board-card/board-card.component';
-import { BoardFormComponent, BoardFormProps } from '../board-form/board-form.component';
+import {
+  BoardFormComponent,
+  BoardFormProps,
+} from '../board-form/board-form.component';
 import { NzButtonModule } from 'ng-zorro-antd/button';
+import { TaskStatus } from '../../core/models/task.type';
 
 @Component({
   selector: 'app-board',
   standalone: true,
-  imports: [CdkDropList, CdkDrag, BoardCardComponent, NzSpinModule, NzModalModule, NzButtonModule],
+  imports: [
+    CdkDropList,
+    CdkDrag,
+    BoardCardComponent,
+    NzSpinModule,
+    NzModalModule,
+    NzButtonModule,
+  ],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -46,20 +57,20 @@ export class BoardComponent implements OnInit {
     {
       key: 'todo',
       label: 'To Do',
-      id: 'todoList',
-      connectedTo: ['inProgressList', 'doneList'],
+      id: 'todo',
+      connectedTo: ['in-progress', 'done'],
     },
     {
       key: 'in-progress',
       label: 'In Progress',
-      id: 'inProgressList',
-      connectedTo: ['todoList', 'doneList'],
+      id: 'in-progress',
+      connectedTo: ['todo', 'done'],
     },
     {
       key: 'done',
       label: 'Done',
-      id: 'doneList',
-      connectedTo: ['todoList', 'inProgressList'],
+      id: 'done',
+      connectedTo: ['todo', 'in-progress'],
     },
   ];
 
@@ -74,8 +85,10 @@ export class BoardComponent implements OnInit {
     this.getData();
   }
 
-  getData() {
-    this.loading.set(true);
+  getData(setLoading = true) {
+    if(setLoading) {
+      this.loading.set(true);
+    }
     this.taskService
       .getTasksGroupedByStatus()
       .pipe(finalize(() => this.loading.set(false)))
@@ -92,30 +105,43 @@ export class BoardComponent implements OnInit {
   drop(event: CdkDragDrop<Task[]>) {
     // As a limitation, only allow drag and drop to a different list. Prevent manual sorting
     if (event.previousContainer !== event.container) {
+      const draggedItem = event.previousContainer.data[event.previousIndex];
       transferArrayItem(
         event.previousContainer.data,
         event.container.data,
         event.previousIndex,
         event.currentIndex
       );
-    } 
+      this.taskService.patchTaskStatus(
+        draggedItem.id,
+        event.container.id as TaskStatus
+      ).subscribe({
+        next: () => {
+          this.notificationService.showSuccess('Task Updated');
+          this.getData(false);
+        },
+        error: (error) => {
+          this.notificationService.showError(error);
+          this.getData();
+        }
+      })
+    }
     return;
   }
 
   addTask() {
-    const modal = this.modalService.create<BoardFormComponent, BoardFormProps> ({
+    const modal = this.modalService.create<BoardFormComponent, BoardFormProps>({
       nzTitle: 'Create New Task',
       nzContent: BoardFormComponent,
       nzViewContainerRef: this.viewContainerRef,
-      nzData: {
-      },
-      nzFooter: null
-    })
+      nzData: {},
+      nzFooter: null,
+    });
 
-    modal.afterClose.subscribe(result => {
-      if(result) {
+    modal.afterClose.subscribe((result) => {
+      if (result) {
         this.getData();
       }
-    })
+    });
   }
 }

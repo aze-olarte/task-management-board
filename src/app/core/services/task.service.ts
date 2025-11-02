@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { map, Observable } from 'rxjs';
 import { environment } from '../../../../environment';
 import { Task, TaskGroupedByStatus, TaskPayload } from '../models/task.model';
+import { TaskStatus } from '../models/task.type';
 
 @Injectable({
   providedIn: 'root',
@@ -35,6 +36,10 @@ export class TaskService {
 
   updateTask(id: number, payload: TaskPayload) {
     return this.http.put<Task>(`${this.baseUrl}/${id}`, payload);
+  }
+
+  patchTaskStatus(id: number, status: TaskStatus) {
+    return this.http.patch<Task>(`${this.baseUrl}/${id}`, {status});
   }
 
   deleteTask(id: number) {
