@@ -16,3 +16,9 @@ export type TaskPayload = Omit<Task, 'createdAt' | 'updatedAt'>;
 export type TaskGroupedByStatus = {
   [K in TaskStatus]: Task[];
 };
+
+export interface TaskFilter {
+  status: TaskStatus[];
+  priority: TaskPriority[];
+  dueDate: Date[] | null;
+}

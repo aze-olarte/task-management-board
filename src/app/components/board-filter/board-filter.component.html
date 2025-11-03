@@ -1,0 +1,65 @@
+<form
+  [formGroup]="form"
+  (ngSubmit)="onSubmit()"
+  nz-form
+  nzLayout="vertical"
+  class="form"
+>
+  <h2>Filters</h2>
+
+  <nz-form-item>
+    <nz-form-label>Status</nz-form-label>
+    <nz-form-control>
+      <nz-select
+        id="status"
+        formControlName="status"
+        nzMode="multiple"
+        nzAllowClear
+      >
+        <nz-option nzValue="todo" nzLabel="To Do"></nz-option>
+        <nz-option nzValue="in-progress" nzLabel="In Progress"></nz-option>
+        <nz-option nzValue="done" nzLabel="Done"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label>Priority</nz-form-label>
+    <nz-form-control>
+      <nz-select
+        id="priority"
+        formControlName="priority"
+        nzMode="multiple"
+        nzAllowClear
+      >
+        <nz-option nzValue="low" nzLabel="Low"></nz-option>
+        <nz-option nzValue="medium" nzLabel="Medium"></nz-option>
+        <nz-option nzValue="high" nzLabel="High"></nz-option>
+      </nz-select>
+    </nz-form-control>
+  </nz-form-item>
+
+  <nz-form-item>
+    <nz-form-label>Due Date</nz-form-label>
+    <nz-form-control>
+      <nz-range-picker
+        formControlName="dueDate"
+        [nzFormat]="'MM/dd/yyyy'"
+      ></nz-range-picker>
+    </nz-form-control>
+  </nz-form-item>
+
+  <div class="form-row">
+    <nz-form-item class="flex-item">
+      <nz-form-control>
+        <button nz-button nzType="text" type="button" (click)="clear()">Clear</button>
+      </nz-form-control>
+    </nz-form-item>
+
+    <nz-form-item class="flex-item">
+      <nz-form-control>
+        <button nz-button nzType="default">Apply Filters</button>
+      </nz-form-control>
+    </nz-form-item>
+  </div>
+</form>
