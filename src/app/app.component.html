@@ -1,4 +1,23 @@
 <div id="app">
-    <router-outlet></router-outlet>
+  <nz-layout>
+    <nz-header></nz-header>
+    <nz-content class="outer-content">
+      <nz-layout class="inner-layout">
+        <nz-sider
+          nzWidth="280px"
+          nzTheme="light"
+          nzCollapsible
+          nzBreakpoint="sm"
+          [nzCollapsedWidth]="0"
+        >
+        </nz-sider>
+        <nz-content class="inner-content">
+          <router-outlet></router-outlet>
+        </nz-content>
+      </nz-layout>
+    </nz-content>
+    <nz-footer>
+        Fulcrum Solutions - Take Home Exam | Azrielle Olarte
+    </nz-footer>
+  </nz-layout>
 </div>
-
