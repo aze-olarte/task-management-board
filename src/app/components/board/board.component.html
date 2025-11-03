@@ -1,33 +1,46 @@
-@if (loading()) {
-<div class="board-loading">
-  <nz-spin nzSize="large"></nz-spin>
-</div>
-} @else {
-<div class="board-header">
-  <button (click)="addTask()" nz-button nzType="primary">Add Task</button>
-</div>
-<div cdkDropListGroup>
-  @for (group of groups; track group.key) {
-  <div class="board-container">
-    <h2>{{ group.label }}</h2>
-    <div
-      [id]="group.id"
-      cdkDropList
-      cdkDropListSortingDisabled
-      [cdkDropListData]="data()[group.key]"
-      [cdkDropListConnectedTo]="group.connectedTo"
-      class="board-list"
-      (cdkDropListDropped)="drop($event)"
-    >
-      @for (item of data()[group.key]; track item) {
-      <app-board-card
-        cdkDrag
-        [task]="item"
-        (taskChanged)="getData()"
-      ></app-board-card>
+<nz-layout>
+  <nz-sider
+    nzWidth="300px"
+    nzTheme="light"
+    nzCollapsible
+    nzBreakpoint="sm"
+    [nzCollapsedWidth]="0"
+  >
+    <app-board-filter></app-board-filter>
+  </nz-sider>
+  <nz-content class="content">
+    @if (loading()) {
+    <div class="board-loading">
+      <nz-spin nzSize="large"></nz-spin>
+    </div>
+    } @else {
+    <div class="board-header">
+      <button (click)="addTask()" nz-button nzType="primary">Add Task</button>
+    </div>
+    <div cdkDropListGroup>
+      @for (group of groups; track group.key) {
+      <div class="board-container">
+        <h2>{{ group.label }}</h2>
+        <div
+          [id]="group.id"
+          cdkDropList
+          cdkDropListSortingDisabled
+          [cdkDropListData]="data()[group.key]"
+          [cdkDropListConnectedTo]="group.connectedTo"
+          class="board-list"
+          (cdkDropListDropped)="drop($event)"
+        >
+          @for (item of data()[group.key]; track item) {
+          <app-board-card
+            cdkDrag
+            [task]="item"
+            (taskChanged)="getData()"
+          ></app-board-card>
+          }
+        </div>
+      </div>
       }
     </div>
-  </div>
-  }
-</div>
-}
+    }
+  </nz-content>
+</nz-layout>

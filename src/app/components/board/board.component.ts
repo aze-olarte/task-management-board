@@ -2,8 +2,7 @@ import {
   CdkDrag,
   CdkDragDrop,
   CdkDropList,
-  moveItemInArray,
-  transferArrayItem,
+  transferArrayItem
 } from '@angular/cdk/drag-drop';
 import {
   ChangeDetectionStrategy,
@@ -12,19 +11,21 @@ import {
   signal,
   ViewContainerRef,
 } from '@angular/core';
+import { NzButtonModule } from 'ng-zorro-antd/button';
+import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzModalModule, NzModalService } from 'ng-zorro-antd/modal';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { finalize } from 'rxjs';
 import { Task, TaskGroupedByStatus } from '../../core/models/task.model';
+import { TaskStatus } from '../../core/models/task.type';
 import { NotificationService } from '../../core/services/notification.service';
 import { TaskService } from '../../core/services/task.service';
 import { BoardCardComponent } from '../board-card/board-card.component';
+import { BoardFilterComponent } from '../board-filter/board-filter.component';
 import {
   BoardFormComponent,
   BoardFormProps,
 } from '../board-form/board-form.component';
-import { NzButtonModule } from 'ng-zorro-antd/button';
-import { TaskStatus } from '../../core/models/task.type';
 
 @Component({
   selector: 'app-board',
@@ -36,6 +37,8 @@ import { TaskStatus } from '../../core/models/task.type';
     NzSpinModule,
     NzModalModule,
     NzButtonModule,
+    NzLayoutModule,
+    BoardFilterComponent
   ],
   templateUrl: './board.component.html',
   styleUrl: './board.component.scss',
