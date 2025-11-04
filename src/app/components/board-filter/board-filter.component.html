@@ -14,6 +14,7 @@
           id="field"
           formControlName="field"
           nzAllowClear
+          nzPlaceHolder="Select field"
         >
           <nz-option nzValue="dueDate" nzLabel="Due Date"></nz-option>
           <nz-option nzValue="priority" nzLabel="Priority"></nz-option>
@@ -25,7 +26,10 @@
     <nz-form-item>
       <nz-form-label>Direction</nz-form-label>
       <nz-form-control>
-        <nz-select formControlName="dir">
+        <nz-select
+          formControlName="dir"
+          nzPlaceHolder="Select direction"
+        >
           <nz-option nzValue="asc" nzLabel="Ascending"></nz-option>
           <nz-option nzValue="desc" nzLabel="Descending"></nz-option>
         </nz-select>
@@ -43,6 +47,7 @@
           formControlName="status"
           nzMode="multiple"
           nzAllowClear
+          nzPlaceHolder="Select status"
         >
           <nz-option nzValue="todo" nzLabel="To Do"></nz-option>
           <nz-option nzValue="in-progress" nzLabel="In Progress"></nz-option>
@@ -59,6 +64,7 @@
           formControlName="priority"
           nzMode="multiple"
           nzAllowClear
+          nzPlaceHolder="Select priority"
         >
           <nz-option nzValue="low" nzLabel="Low"></nz-option>
           <nz-option nzValue="medium" nzLabel="Medium"></nz-option>
@@ -73,6 +79,7 @@
         <nz-range-picker
           formControlName="dueDate"
           [nzFormat]="'MM/dd/yyyy'"
+          nzPlaceHolder="Select date range"
         ></nz-range-picker>
       </nz-form-control>
     </nz-form-item>
