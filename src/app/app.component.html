@@ -1,6 +1,15 @@
 <div id="app">
   <nz-layout>
-    <nz-header></nz-header>
+    <nz-header>
+        <ul nz-menu nzTheme="dark" nzMode="horizontal">
+          <li nz-menu-item nzMatchRouterExact nzMatchRouter="/">
+            <a routerLink="/">Dashboard</a>
+          </li>
+          <li nz-menu-item nzMatchRouterExact nzMatchRouter="/task-board">
+            <a routerLink="/task-board">Task Board</a>
+          </li>
+        </ul>
+    </nz-header>
     <nz-content class="outer-content">
       <router-outlet></router-outlet>
     </nz-content>
