@@ -7,12 +7,12 @@ import {
 } from '@angular/forms';
 import { NzButtonModule } from 'ng-zorro-antd/button';
 import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
+import { NzDividerModule } from 'ng-zorro-antd/divider';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzSelectModule } from 'ng-zorro-antd/select';
-import { TaskFilter, TaskQuery } from '../../core/models/task.model';
+import { TaskQuery } from '../../core/models/task.model';
 import { TaskPriority, TaskStatus } from '../../core/models/task.type';
-
 
 @Component({
   selector: 'app-board-filter',
@@ -25,6 +25,7 @@ import { TaskPriority, TaskStatus } from '../../core/models/task.type';
     NzSelectModule,
     NzDatePickerModule,
     NzButtonModule,
+    NzDividerModule
   ],
   templateUrl: './board-filter.component.html',
   styleUrl: './board-filter.component.scss',
