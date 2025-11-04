@@ -15,6 +15,7 @@ import { en_US, provideNzI18n } from 'ng-zorro-antd/i18n';
 import { provideNzIcons } from 'ng-zorro-antd/icon';
 import { routes } from './app.routes';
 import { interceptor } from './core/services/interceptor.service';
+import { provideCharts, withDefaultRegisterables } from 'ng2-charts';
 
 const icons: IconDefinition[] = [CalendarOutline, EditOutline, HistoryOutline];
 
@@ -29,5 +30,6 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     provideHttpClient(withInterceptors([interceptor])),
     provideNzIcons(icons),
+    provideCharts(withDefaultRegisterables()),
   ],
 };
