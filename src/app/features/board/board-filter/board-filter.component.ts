@@ -18,8 +18,8 @@ import { NzDropDownModule } from 'ng-zorro-antd/dropdown';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzSelectModule } from 'ng-zorro-antd/select';
-import { TaskQuery } from '../../core/models/task.model';
-import { TaskPriority, TaskStatus } from '../../core/models/task.type';
+import { TaskQuery } from '../../../core/models/task.model';
+import { TaskPriority, TaskStatus } from '../../../core/models/task.type';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 
 @Component({

@@ -2,17 +2,17 @@ import { Routes } from '@angular/router';
 
 export const routes: Routes = [
   {
-    path: 'task-board',
+    path: '',
     loadComponent: () =>
-      import('./components/board/board.component').then(
-        (m) => m.BoardComponent
+      import('./features/dashboard/dashboard-container/dashboard-container.component').then(
+        (m) => m.DashboardContainerComponent
       ),
   },
   {
-    path: '',
+    path: 'task-board',
     loadComponent: () =>
-      import('./components/dashboard/dashboard.component').then(
-        (m) => m.DashboardComponent
+      import('./features/board/board-container/board-container.component').then(
+        (m) => m.BoardContainerComponent
       ),
-  },
+  }
 ];

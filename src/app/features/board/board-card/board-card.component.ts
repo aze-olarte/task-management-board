@@ -9,14 +9,14 @@ import {
 } from '@angular/core';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzTagModule } from 'ng-zorro-antd/tag';
-import { Task } from '../../core/models/task.model';
+import { Task } from '../../../core/models/task.model';
 import { DatePipe, TitleCasePipe } from '@angular/common';
-import { TruncatePipe } from '../../shared/pipes/truncate.pipe';
+import { TruncatePipe } from '../../../shared/pipes/truncate.pipe';
 import { NzIconModule } from 'ng-zorro-antd/icon';
 import { NzModalModule, NzModalService } from 'ng-zorro-antd/modal';
 import { BoardFormComponent, BoardFormProps } from '../board-form/board-form.component';
-import { TaskService } from '../../core/services/task.service';
-import { NotificationService } from '../../core/services/notification.service';
+import { TaskService } from '../../../core/services/task.service';
+import { NotificationService } from '../../../core/services/notification.service';
 
 @Component({
   selector: 'app-board-card',

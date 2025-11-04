@@ -16,10 +16,10 @@ import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzModalModule, NzModalService } from 'ng-zorro-antd/modal';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { finalize } from 'rxjs';
-import { Task, TaskGroupedByStatus, TaskQuery } from '../../core/models/task.model';
-import { TaskStatus } from '../../core/models/task.type';
-import { NotificationService } from '../../core/services/notification.service';
-import { TaskService } from '../../core/services/task.service';
+import { Task, TaskGroupedByStatus, TaskQuery } from '../../../core/models/task.model';
+import { TaskStatus } from '../../../core/models/task.type';
+import { NotificationService } from '../../../core/services/notification.service';
+import { TaskService } from '../../../core/services/task.service';
 import { BoardCardComponent } from '../board-card/board-card.component';
 import { BoardFilterComponent } from '../board-filter/board-filter.component';
 import {
@@ -28,7 +28,7 @@ import {
 } from '../board-form/board-form.component';
 
 @Component({
-  selector: 'app-board',
+  selector: 'app-board-container',
   standalone: true,
   imports: [
     CdkDropList,
@@ -40,11 +40,11 @@ import {
     NzLayoutModule,
     BoardFilterComponent
   ],
-  templateUrl: './board.component.html',
-  styleUrl: './board.component.scss',
+  templateUrl: './board-container.component.html',
+  styleUrl: './board-container.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class BoardComponent implements OnInit {
+export class BoardContainerComponent implements OnInit {
   data = signal<TaskGroupedByStatus>({
     todo: [],
     'in-progress': [],
