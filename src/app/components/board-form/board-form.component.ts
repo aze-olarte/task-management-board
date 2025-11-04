@@ -83,9 +83,7 @@ export class BoardFormComponent {
 
     const payload = {
       ...this.form.getRawValue(),
-      id: this.props.data ? 
-        (this.props.data as Task).id 
-        : Math.floor(Math.random() * 1000000), // instead of using 0 for new ids, use a randomly generated number so that we can edit tasks we created
+      id: this.props.data ? (this.props.data as Task).id : 0,
     };
     const isNew = !this.props.data;
 
