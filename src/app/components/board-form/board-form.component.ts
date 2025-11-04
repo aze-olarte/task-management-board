@@ -1,4 +1,4 @@
-import { ChangeDetectionStrategy, Component, effect, Inject, Input, input, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, Inject } from '@angular/core';
 import {
   FormControl,
   FormGroup,
@@ -12,10 +12,10 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NZ_MODAL_DATA, NzModalRef } from 'ng-zorro-antd/modal';
 import { NzSelectModule } from 'ng-zorro-antd/select';
-import { TaskService } from '../../core/services/task.service';
 import { Task } from '../../core/models/task.model';
 import { TaskPriority, TaskStatus } from '../../core/models/task.type';
 import { NotificationService } from '../../core/services/notification.service';
+import { TaskService } from '../../core/services/task.service';
 
 @Component({
   selector: 'app-board-form',

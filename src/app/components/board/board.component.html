@@ -6,7 +6,9 @@
     nzBreakpoint="sm"
     [nzCollapsedWidth]="0"
   >
-    <app-board-filter></app-board-filter>
+    <app-board-filter
+      (filterChanged)="setFilters($event)"
+    ></app-board-filter>
   </nz-sider>
   <nz-content class="content">
     @if (loading()) {

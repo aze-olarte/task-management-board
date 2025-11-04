@@ -10,10 +10,8 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzSelectModule } from 'ng-zorro-antd/select';
-import { TaskPriority, TaskStatus } from '../../core/models/task.type';
-import { NotificationService } from '../../core/services/notification.service';
-import { TaskService } from '../../core/services/task.service';
 import { TaskFilter } from '../../core/models/task.model';
+import { TaskPriority, TaskStatus } from '../../core/models/task.type';
 
 
 @Component({
@@ -34,7 +32,7 @@ import { TaskFilter } from '../../core/models/task.model';
 })
 
 export class BoardFilterComponent {
-  @Output() filterChanged = new EventEmitter<TaskFilter>();
+  @Output() filterChanged = new EventEmitter<TaskFilter | null>();
   form = new FormGroup({
     status: new FormControl<TaskStatus[]>([], {
       nonNullable: true,
@@ -45,19 +43,13 @@ export class BoardFilterComponent {
     dueDate: new FormControl(null),
   });
 
-
-  constructor(
-    private taskService: TaskService,
-    private notificationService: NotificationService,
-  ) {
-  }
-
   clear() {
     this.form.reset();
-    this.filterChanged.emit(this.form.getRawValue())
+    this.filterChanged.emit(null)
   }
 
   onSubmit() {
-    console.log(this.form.getRawValue())
+    const filters = this.form.getRawValue();
+    this.filterChanged.emit(filters);
   }
 }
