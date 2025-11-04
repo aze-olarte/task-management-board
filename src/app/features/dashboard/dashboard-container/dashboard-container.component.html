@@ -1,7 +1,13 @@
-<h1>Dashboard</h1>
+<div class="dashboard">
+  <h1 class="dashboard-title">Dashboard</h1>
 
-<div class="chart-container">
-  <app-pie-chart-status
-    [taskData]="taskData()"
-  ></app-pie-chart-status>
+  <div class="dashboard-grid">
+    <div class="chart-card">
+      <app-pie-chart-status [taskData]="taskData()"></app-pie-chart-status>
+    </div>
+
+    <div class="chart-card">
+      <app-bar-chart-priority [taskData]="taskData()"></app-bar-chart-priority>
+    </div>
+  </div>
 </div>

@@ -3,11 +3,12 @@ import { PieChartStatusComponent } from '../pie-chart-status/pie-chart-status.co
 import { Task } from '../../../core/models/task.model';
 import { TaskService } from '../../../core/services/task.service';
 import { NotificationService } from '../../../core/services/notification.service';
+import { BarChartPriorityComponent } from "../bar-chart-priority/bar-chart-priority.component";
 
 @Component({
   selector: 'app-dashboard-container',
   standalone: true,
-  imports: [PieChartStatusComponent],
+  imports: [PieChartStatusComponent, BarChartPriorityComponent],
   templateUrl: './dashboard-container.component.html',
   styleUrl: './dashboard-container.component.scss'
 })

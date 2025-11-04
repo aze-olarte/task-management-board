@@ -1,8 +1,10 @@
-<h2>Tasks By Status</h2>
-<canvas
-  baseChart
-  [data]="pieChartData()"
-  [options]="pieChartOptions"
-  [type]="'pie'"
->
-</canvas>
+<h2 class="title">Tasks By Status</h2>
+<div class="chart-wrapper">
+  <canvas
+    baseChart
+    [data]="pieChartData()"
+    [options]="pieChartOptions"
+    [type]="'pie'"
+  >
+  </canvas>
+</div>
