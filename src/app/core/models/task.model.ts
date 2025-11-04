@@ -22,3 +22,13 @@ export interface TaskFilter {
   priority: TaskPriority[];
   dueDate: Date[] | null;
 }
+
+export interface TaskSort {
+  field: string;
+  dir: string;
+}
+
+export interface TaskQuery {
+  filters: TaskFilter;
+  sort: TaskSort;
+}

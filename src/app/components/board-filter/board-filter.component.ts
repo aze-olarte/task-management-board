@@ -10,7 +10,7 @@ import { NzDatePickerModule } from 'ng-zorro-antd/date-picker';
 import { NzFormModule } from 'ng-zorro-antd/form';
 import { NzInputModule } from 'ng-zorro-antd/input';
 import { NzSelectModule } from 'ng-zorro-antd/select';
-import { TaskFilter } from '../../core/models/task.model';
+import { TaskFilter, TaskQuery } from '../../core/models/task.model';
 import { TaskPriority, TaskStatus } from '../../core/models/task.type';
 
 
@@ -32,15 +32,22 @@ import { TaskPriority, TaskStatus } from '../../core/models/task.type';
 })
 
 export class BoardFilterComponent {
-  @Output() filterChanged = new EventEmitter<TaskFilter | null>();
-  form = new FormGroup({
-    status: new FormControl<TaskStatus[]>([], {
-      nonNullable: true,
-    }),
-    priority: new FormControl<TaskPriority[]>([], {
-      nonNullable: true,
-    }),
+  @Output() filterChanged = new EventEmitter<TaskQuery | null>();
+
+  filterForm = new FormGroup({
+    status: new FormControl<TaskStatus[]>([], { nonNullable: true }),
+    priority: new FormControl<TaskPriority[]>([], { nonNullable: true }),
     dueDate: new FormControl(null),
+  });
+
+  sortForm = new FormGroup({
+    field: new FormControl('', { nonNullable: true }),
+    dir: new FormControl('asc', { nonNullable: true }),
+  });
+
+  form = new FormGroup({
+    filters: this.filterForm,
+    sort: this.sortForm
   });
 
   clear() {

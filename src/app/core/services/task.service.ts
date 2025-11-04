@@ -7,6 +7,7 @@ import {
   TaskFilter,
   TaskGroupedByStatus,
   TaskPayload,
+  TaskQuery,
 } from '../models/task.model';
 import { TaskStatus } from '../models/task.type';
 
@@ -19,64 +20,55 @@ export class TaskService {
   constructor(private http: HttpClient) {}
 
   getTasksGroupedByStatus(
-    filters: TaskFilter | null
+    query: TaskQuery | null
   ): Observable<TaskGroupedByStatus> {
     let params = new HttpParams();
 
-    // * Server-side filtering is not working. Due to time constraints, I've used client side filtering as a work around
-    // if (filters) {
-    //   if (filters.status?.length) {
-    //     filters.status.forEach(status => {
-    //       params = params.append('status', status);
-    //     });
-    //   }
+    if (query) {
+      const { filters, sort } = query;
 
-    //   if (filters.priority?.length) {
-    //     filters.priority.forEach(priority => {
-    //       params = params.append('priority', priority);
-    //     });
-    //   }
+      if (sort.field && sort.field !== 'priority') {
+        params = params.append('_sort', query.sort.field);
+        params = params.append('_order', query.sort.dir || 'asc');
+      }
 
-    //   if (filters.dueDate?.length) {
-    //     const [start, end] = filters.dueDate;
-    //     if (start) {
-    //       params = params.append('dueDate_gte', start.toISOString());
-    //     }
-    //     if (end) {
-    //       params = params.append('dueDate_lte', end.toISOString());
-    //     }
-    //   }
-    // }
+      if (filters) {
+        if (filters.status?.length) {
+          filters.status.forEach((status) => {
+            params = params.append('status', status);
+          });
+        }
+
+        if (filters.priority?.length) {
+          filters.priority.forEach((priority) => {
+            params = params.append('priority', priority);
+          });
+        }
+
+        if (filters.dueDate?.length) {
+          const [start, end] = filters.dueDate;
+          if (start) {
+            params = params.append('dueDate_gte', start.toISOString());
+          }
+          if (end) {
+            params = params.append('dueDate_lte', end.toISOString());
+          }
+        }
+      }
+    }
 
     return this.http.get<Task[]>(this.baseUrl, { params }).pipe(
       map((tasks) => {
-        // Client-side filtering (work around)
-        if (filters) {
-          if (filters.status?.length) {
-            tasks = tasks.filter((task) =>
-              filters.status.includes(task.status)
-            );
-          }
-          if (filters.priority?.length) {
-            tasks = tasks.filter((task) =>
-              filters.priority.includes(task.priority)
-            );
-          }
 
-          if (filters.dueDate?.length === 2) {
-            const [start, end] = filters.dueDate;
-            const startTime = new Date(start);
-            startTime.setHours(0, 0, 0, 0);
-            const endTime = new Date(end);
-            endTime.setHours(23, 59, 59, 999);
-
-            tasks = tasks.filter(
-              (task) =>
-                task.dueDate &&
-                new Date(task.dueDate).getTime() >= startTime.getTime() &&
-                new Date(task.dueDate).getTime() <= endTime.getTime()
-            );
-          }
+        // This is a quick work around, since we're only saving priority as a string. At this point, changing priority 
+        // from string to {id: number, name: string} type would lead to more changes which will not fit the time constraint
+        if (query?.sort?.field === 'priority') {
+          const priorityOrder = { high: 3, medium: 2, low: 1 };
+          tasks.sort((a, b) => {
+            const aVal = priorityOrder[a.priority];
+            const bVal = priorityOrder[b.priority];
+            return query.sort?.dir === 'asc' ? aVal - bVal : bVal - aVal;
+          });
         }
 
         const grouped: TaskGroupedByStatus = {

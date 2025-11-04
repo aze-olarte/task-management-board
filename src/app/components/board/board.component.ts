@@ -16,7 +16,7 @@ import { NzLayoutModule } from 'ng-zorro-antd/layout';
 import { NzModalModule, NzModalService } from 'ng-zorro-antd/modal';
 import { NzSpinModule } from 'ng-zorro-antd/spin';
 import { finalize } from 'rxjs';
-import { Task, TaskFilter, TaskGroupedByStatus } from '../../core/models/task.model';
+import { Task, TaskGroupedByStatus, TaskQuery } from '../../core/models/task.model';
 import { TaskStatus } from '../../core/models/task.type';
 import { NotificationService } from '../../core/services/notification.service';
 import { TaskService } from '../../core/services/task.service';
@@ -76,7 +76,7 @@ export class BoardComponent implements OnInit {
       connectedTo: ['todo', 'in-progress'],
     },
   ];
-  filters = signal<TaskFilter | null>(null);
+  filters = signal<TaskQuery | null>(null);
 
   constructor(
     private taskService: TaskService,
@@ -149,8 +149,7 @@ export class BoardComponent implements OnInit {
     });
   }
 
-  setFilters(filters: TaskFilter | null) {
-    console.log(filters)
+  setFilters(filters: TaskQuery | null) {
     this.filters.set(filters);
     this.getData();
   }
