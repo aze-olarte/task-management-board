@@ -32,7 +32,7 @@
           class="board-list"
           (cdkDropListDropped)="drop($event)"
         >
-          @for (item of data()[group.key]; track item) {
+          @for (item of data()[group.key]; track item.id) {
           <app-board-card
             cdkDrag
             [task]="item"
