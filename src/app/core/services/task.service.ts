@@ -45,6 +45,10 @@ export class TaskService {
           });
         }
 
+        if (filters.text?.length) {
+          params = params.append('q', filters.text);
+        }
+
         if (filters.dueDate?.length) {
           const [start, end] = filters.dueDate;
           if (start) {

@@ -21,6 +21,7 @@ export interface TaskFilter {
   status: TaskStatus[];
   priority: TaskPriority[];
   dueDate: Date[] | null;
+  text: string;
 }
 
 export interface TaskSort {

@@ -26,10 +26,7 @@
     <nz-form-item>
       <nz-form-label>Direction</nz-form-label>
       <nz-form-control>
-        <nz-select
-          formControlName="dir"
-          nzPlaceHolder="Select direction"
-        >
+        <nz-select formControlName="dir" nzPlaceHolder="Select direction">
           <nz-option nzValue="asc" nzLabel="Ascending"></nz-option>
           <nz-option nzValue="desc" nzLabel="Descending"></nz-option>
         </nz-select>
@@ -39,6 +36,45 @@
 
   <nz-divider nzText="Filters"></nz-divider>
   <div formGroupName="filters">
+    <nz-form-item>
+      <nz-form-label>Title / Description</nz-form-label>
+      <nz-form-control>
+        <nz-input-group [nzSuffix]="suffixTemplate">
+          <input
+            nz-input
+            placeholder="Search by title or description"
+            formControlName="text"
+          />
+        </nz-input-group>
+
+        <ng-template #suffixTemplate>
+          <button
+            type="button"
+            nz-button
+            nzType="default"
+            nz-dropdown
+            [nzDropdownMenu]="historyMenu"
+            (nzVisibleChange)="onHistoryVisibleChange($event)"
+            nzPlacement="bottomRight"
+          >
+            <i nz-icon nzType="history" nzTheme="outline"></i>
+          </button>
+        </ng-template>
+
+        <nz-dropdown-menu #historyMenu="nzDropdownMenu" class="search-history-dropdown">
+          <ul nz-menu>
+            @if (!searchHistory.length) {
+            <li nz-menu-item disabled>No history</li>
+            } @else { @for (term of searchHistory; track term) {
+            <li nz-menu-item (click)="applySearchHistory(term)">
+              {{ term }}
+            </li>
+            } }
+          </ul>
+        </nz-dropdown-menu>
+      </nz-form-control>
+    </nz-form-item>
+
     <nz-form-item>
       <nz-form-label>Status</nz-form-label>
       <nz-form-control>
@@ -88,7 +124,9 @@
   <div class="form-row">
     <nz-form-item class="flex-item">
       <nz-form-control>
-        <button nz-button nzType="text" type="button" (click)="clear()">Clear</button>
+        <button nz-button nzType="text" type="button" (click)="clear()">
+          Clear
+        </button>
       </nz-form-control>
     </nz-form-item>
 
