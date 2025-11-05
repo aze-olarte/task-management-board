@@ -30,6 +30,6 @@ export interface TaskSort {
 }
 
 export interface TaskQuery {
-  filters: TaskFilter;
-  sort: TaskSort;
+  filters?: TaskFilter;
+  sort?: TaskSort;
 }

@@ -31,9 +31,11 @@ export class TaskService {
     if (query) {
       const { filters, sort } = query;
 
-      if (sort.field && sort.field !== 'priority') {
-        params = params.append('_sort', query.sort.field);
-        params = params.append('_order', query.sort.dir || 'asc');
+      if(sort) {
+        if (sort.field && sort.field !== 'priority') {
+          params = params.append('_sort', sort.field);
+          params = params.append('_order', sort.dir || 'asc');
+        }
       }
 
       if (filters) {

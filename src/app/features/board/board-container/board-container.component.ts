@@ -76,7 +76,12 @@ export class BoardContainerComponent implements OnInit {
       connectedTo: ['todo', 'in-progress'],
     },
   ];
-  filters = signal<TaskQuery | null>(null);
+  filters = signal<TaskQuery | null>({
+    sort: {
+      field: 'createdAt',
+      dir: 'desc'
+    }
+  });
 
   constructor(
     private taskService: TaskService,
@@ -150,7 +155,16 @@ export class BoardContainerComponent implements OnInit {
   }
 
   setFilters(filters: TaskQuery | null) {
-    this.filters.set(filters);
+    if (filters === null) {
+      this.filters.set({
+        sort: {
+          field: 'createdAt',
+          dir: 'desc',
+        },
+      });
+    } else {
+      this.filters.set(filters);
+    }
     this.getData();
   }
 }
