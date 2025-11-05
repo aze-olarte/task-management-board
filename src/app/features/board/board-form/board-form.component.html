@@ -6,7 +6,7 @@
   class="form"
 >
   <nz-form-item>
-    <nz-form-label nzRequired>Title</nz-form-label>
+    <nz-form-label nzRequired nzFor="title">Title</nz-form-label>
     <nz-form-control [nzErrorTip]="titleError">
       <input nz-input formControlName="title" />
       <ng-template #titleError let-control>
@@ -15,7 +15,7 @@
     </nz-form-control>
   </nz-form-item>
   <nz-form-item>
-    <nz-form-label>Description</nz-form-label>
+    <nz-form-label nzFor="description">Description</nz-form-label>
     <nz-form-control>
       <textarea
         nz-input
@@ -27,7 +27,7 @@
 
   <div class="form-row">
     <nz-form-item class="flex-item">
-      <nz-form-label nzRequired>Status</nz-form-label>
+      <nz-form-label nzRequired nzFor="status">Status</nz-form-label>
       <nz-form-control [nzErrorTip]="statusError">
         <nz-select id="status" formControlName="status">
           <nz-option nzValue="todo" nzLabel="To Do"></nz-option>
@@ -40,7 +40,7 @@
       </nz-form-control>
     </nz-form-item>
     <nz-form-item class="flex-item">
-      <nz-form-label nzRequired>Priority</nz-form-label>
+      <nz-form-label nzRequired nzFor="priority">Priority</nz-form-label>
       <nz-form-control [nzErrorTip]="priorityError">
         <nz-select id="priority" formControlName="priority">
           <nz-option nzValue="low" nzLabel="Low"></nz-option>
@@ -55,7 +55,7 @@
   </div>
 
   <nz-form-item>
-    <nz-form-label>Due Date</nz-form-label>
+    <nz-form-label nzFor="dueDate">Due Date</nz-form-label>
     <nz-form-control>
       <nz-date-picker
         formControlName="dueDate"

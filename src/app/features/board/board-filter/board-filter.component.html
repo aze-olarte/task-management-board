@@ -4,17 +4,22 @@
   nz-form
   nzLayout="vertical"
   class="form"
+  role="form"
+  aria-labelledby="filtersFormTitle"
 >
-  <nz-divider nzText="Sort"></nz-divider>
-  <div formGroupName="sort">
+  <h2 id="filtersFormTitle" class="sr-only">Task Sorting and Filters</h2>
+
+  <nz-divider nzText="Sort" role="separator"></nz-divider>
+  <div formGroupName="sort" aria-label="Sort Options">
     <nz-form-item>
-      <nz-form-label>Field</nz-form-label>
+      <nz-form-label nzFor="field">Field</nz-form-label>
       <nz-form-control>
         <nz-select
           id="field"
           formControlName="field"
           nzAllowClear
           nzPlaceHolder="Select field"
+          aria-label="Select sorting field"
         >
           <nz-option nzValue="dueDate" nzLabel="Due Date"></nz-option>
           <nz-option nzValue="priority" nzLabel="Priority"></nz-option>
@@ -24,9 +29,14 @@
     </nz-form-item>
 
     <nz-form-item>
-      <nz-form-label>Direction</nz-form-label>
+      <nz-form-label nzFor="dir">Direction</nz-form-label>
       <nz-form-control>
-        <nz-select formControlName="dir" nzPlaceHolder="Select direction">
+        <nz-select
+          id="dir"
+          formControlName="dir"
+          nzPlaceHolder="Select direction"
+          aria-label="Select sorting direction"
+        >
           <nz-option nzValue="asc" nzLabel="Ascending"></nz-option>
           <nz-option nzValue="desc" nzLabel="Descending"></nz-option>
         </nz-select>
@@ -34,16 +44,19 @@
     </nz-form-item>
   </div>
 
-  <nz-divider nzText="Filters"></nz-divider>
-  <div formGroupName="filters">
+  <nz-divider nzText="Filters" role="separator"></nz-divider>
+  <div formGroupName="filters" aria-label="Filter Options">
     <nz-form-item>
-      <nz-form-label>Title / Description</nz-form-label>
+      <nz-form-label nzFor="text">Title or Description</nz-form-label>
       <nz-form-control>
         <nz-input-group [nzSuffix]="suffixTemplate">
           <input
+            id="text"
             nz-input
+            type="text"
             placeholder="Search by title or description"
             formControlName="text"
+            aria-label="Search tasks by title or description"
           />
         </nz-input-group>
 
@@ -56,17 +69,35 @@
             [nzDropdownMenu]="historyMenu"
             (nzVisibleChange)="onHistoryVisibleChange($event)"
             nzPlacement="bottomRight"
+            aria-haspopup="menu"
+            aria-label="Show search history"
           >
-            <i nz-icon nzType="history" nzTheme="outline"></i>
+            <i
+              nz-icon
+              nzType="history"
+              nzTheme="outline"
+              aria-hidden="true"
+            ></i>
           </button>
         </ng-template>
 
-        <nz-dropdown-menu #historyMenu="nzDropdownMenu" class="search-history-dropdown">
-          <ul nz-menu>
+        <nz-dropdown-menu
+          #historyMenu="nzDropdownMenu"
+          class="search-history-dropdown"
+          aria-label="Search history"
+        >
+          <ul nz-menu role="menu">
             @if (!searchHistory.length) {
-            <li nz-menu-item disabled>No history</li>
+            <li nz-menu-item role="menuitem" aria-disabled="true">
+              No history
+            </li>
             } @else { @for (term of searchHistory; track term) {
-            <li nz-menu-item (click)="applySearchHistory(term)">
+            <li
+              nz-menu-item
+              role="menuitem"
+              (click)="applySearchHistory(term)"
+              tabindex="0"
+            >
               {{ term }}
             </li>
             } }
@@ -76,7 +107,7 @@
     </nz-form-item>
 
     <nz-form-item>
-      <nz-form-label>Status</nz-form-label>
+      <nz-form-label nzFor="status">Status</nz-form-label>
       <nz-form-control>
         <nz-select
           id="status"
@@ -84,6 +115,7 @@
           nzMode="multiple"
           nzAllowClear
           nzPlaceHolder="Select status"
+          aria-label="Select task status"
         >
           <nz-option nzValue="todo" nzLabel="To Do"></nz-option>
           <nz-option nzValue="in-progress" nzLabel="In Progress"></nz-option>
@@ -93,7 +125,7 @@
     </nz-form-item>
 
     <nz-form-item>
-      <nz-form-label>Priority</nz-form-label>
+      <nz-form-label nzFor="priority">Priority</nz-form-label>
       <nz-form-control>
         <nz-select
           id="priority"
@@ -101,6 +133,7 @@
           nzMode="multiple"
           nzAllowClear
           nzPlaceHolder="Select priority"
+          aria-label="Select task priority"
         >
           <nz-option nzValue="low" nzLabel="Low"></nz-option>
           <nz-option nzValue="medium" nzLabel="Medium"></nz-option>
@@ -110,21 +143,29 @@
     </nz-form-item>
 
     <nz-form-item>
-      <nz-form-label>Due Date</nz-form-label>
+      <nz-form-label nzFor="dueDate">Due Date</nz-form-label>
       <nz-form-control>
         <nz-range-picker
+          id="dueDate"
           formControlName="dueDate"
           [nzFormat]="'MM/dd/yyyy'"
           nzPlaceHolder="Select date range"
+          aria-label="Select due date range"
         ></nz-range-picker>
       </nz-form-control>
     </nz-form-item>
   </div>
 
-  <div class="form-row">
+  <div class="form-row" role="group" aria-label="Form actions">
     <nz-form-item class="flex-item">
       <nz-form-control>
-        <button nz-button nzType="text" type="button" (click)="clear()">
+        <button
+          nz-button
+          nzType="text"
+          type="button"
+          (click)="clear()"
+          aria-label="Clear filters"
+        >
           Clear
         </button>
       </nz-form-control>
@@ -132,7 +173,14 @@
 
     <nz-form-item class="flex-item">
       <nz-form-control>
-        <button nz-button nzType="default">Apply Filters</button>
+        <button
+          nz-button
+          nzType="default"
+          type="submit"
+          aria-label="Apply filters"
+        >
+          Apply Filters
+        </button>
       </nz-form-control>
     </nz-form-item>
   </div>

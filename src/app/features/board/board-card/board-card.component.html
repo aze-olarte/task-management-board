@@ -1,36 +1,59 @@
-<nz-card class="task-card">
-  <header class="task-header">
+<nz-card
+  class="task-card"
+  role="group"
+  [attr.aria-labelledby]="'taskTitle-' + task()?.id"
+>
+  <header class="task-header" role="banner">
     <nz-tag [nzColor]="priorityColor()">
       {{ task()?.priority | titlecase }}
     </nz-tag>
 
-    <div class="action-buttons">
-      <button type="button" (click)="editTask()" class="edit-btn">
-        <i nz-icon nzType="edit" nzTheme="outline"></i>
+    <div class="action-buttons" role="group" aria-label="Task actions">
+      <button
+        type="button"
+        (click)="editTask()"
+        class="edit-btn"
+        aria-label="Edit task"
+      >
+        <i nz-icon nzType="edit" nzTheme="outline" aria-hidden="true"></i>
       </button>
-      <button type="button" (click)="deleteTask()" class="delete-btn">
-        <i nz-icon nzType="delete" nzTheme="outline"></i>
+      <button
+        type="button"
+        (click)="deleteTask()"
+        class="delete-btn"
+        aria-label="Delete task"
+      >
+        <i nz-icon nzType="delete" nzTheme="outline" aria-hidden="true"></i>
       </button>
     </div>
   </header>
 
-  <section class="task-body">
-    <h3 class="task-title">{{ task()?.title }}</h3>
-    <p class="desc">{{ task()?.description | truncate }}</p>
+  <section class="task-body" role="region">
+    <h3
+      class="task-title"
+      [id]="'taskTitle-' + task()?.id"
+      aria-label="Task title"
+    >
+      {{ task()?.title }}
+    </h3>
 
-    <div class="meta">
-      <div class="due">
+    <p class="desc" aria-label="Task description">
+      {{ task()?.description | truncate }}
+    </p>
+
+    <div class="meta" role="contentinfo">
+      <div class="due" aria-label="Task due information">
         @if (task()?.status === 'done') {
-        <p class="status-done">Completed</p>
+        <p class="status-done" aria-label="Task completed">Completed</p>
         } @else {
-          <i nz-icon nzType="calendar" nzTheme="outline"></i>
-          @if(task()?.dueDate) {
-            <time>{{ task()?.dueDate | date : "MMMM d, y" }}</time>
-          }
-          @else {
-            <p>N/A</p>
-          }
-        }
+        <i nz-icon nzType="calendar" nzTheme="outline" aria-hidden="true"></i>
+        @if (task()?.dueDate) {
+        <time [attr.datetime]="task()?.dueDate">
+          {{ task()?.dueDate | date : "MMMM d, y" }}
+        </time>
+        } @else {
+        <p aria-label="No due date available">N/A</p>
+        } }
       </div>
     </div>
   </section>
